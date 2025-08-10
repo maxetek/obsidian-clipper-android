@@ -22,11 +22,19 @@ jobs:
     - name: Gradle permissions
       run: chmod +x ./gradlew
 
+    - name: Gradle clean
+      run: ./gradlew clean
+
     - name: Build debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
 
     - name: Build release APK (unsigned)
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleRelease --stacktrace
+
+    - name: Ensure output dirs exist
+      run: |
+        mkdir -p app/build/outputs/apk/debug
+        mkdir -p app/build/outputs/apk/release
 
     - name: Upload debug APKs
       uses: actions/upload-artifact@v4
