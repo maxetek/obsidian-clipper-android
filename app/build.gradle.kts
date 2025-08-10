@@ -2,25 +2,23 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
-
 android {
     namespace = "com.obsidian.clipper"
     compileSdk = 35
-
     defaultConfig {
         applicationId = "com.obsidian.clipper"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -49,7 +47,6 @@ android {
         }
     }
 }
-
 dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
@@ -68,6 +65,21 @@ dependencies {
     
     // Share functionality
     implementation("androidx.browser:browser:1.8.0")
+    
+    // Room dependencies
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    
+    // Hilt dependencies
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-compiler:2.48")
+    
+    // Jsoup for HTML parsing
+    implementation("org.jsoup:jsoup:1.17.2")
+    
+    // Kotlinx DateTime
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
     
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
